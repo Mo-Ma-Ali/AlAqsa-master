@@ -465,6 +465,92 @@ void PrimitiveDrawer::SmallMinaret(Point v1,float scaleX ,float scaleY,float sca
     glPopMatrix();
 }
 
+void PrimitiveDrawer::SmallMinaretWithTexture(Point v1, float scaleX, float scaleY, float scaleZ,
+    int bottomImage, int frontImage, int rightImage,
+    int leftImage, int backImage, int topImage,
+    int sphereTexture)
+{
+    glPushMatrix(); // Save the current matrix
+
+    // Translate to the specified position
+    glTranslatef(v1.x, v1.y, v1.z);
+
+    // Apply scaling
+    glScalef(scaleX, scaleY, scaleZ);
+
+    // Draw the cube with textured faces
+    glEnable(GL_TEXTURE_2D);
+
+    // Bottom face
+    glBindTexture(GL_TEXTURE_2D, bottomImage);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0); glVertex3f(0, 0, 0);
+    glTexCoord2f(1, 0); glVertex3f(2, 0, 0);
+    glTexCoord2f(1, 1); glVertex3f(2, 2, 0);
+    glTexCoord2f(0, 1); glVertex3f(0, 2, 0);
+    glEnd();
+
+    // Front face
+    glBindTexture(GL_TEXTURE_2D, frontImage);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0); glVertex3f(0, 0, 0);
+    glTexCoord2f(1, 0); glVertex3f(2, 0, 0);
+    glTexCoord2f(1, 1); glVertex3f(2, 0, 2);
+    glTexCoord2f(0, 1); glVertex3f(0, 0, 2);
+    glEnd();
+
+    // Right face
+    glBindTexture(GL_TEXTURE_2D, rightImage);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0); glVertex3f(2, 0, 0);
+    glTexCoord2f(1, 0); glVertex3f(2, 0, 2);
+    glTexCoord2f(1, 1); glVertex3f(2, 2, 2);
+    glTexCoord2f(0, 1); glVertex3f(2, 2, 0);
+    glEnd();
+
+    // Left face
+    glBindTexture(GL_TEXTURE_2D, leftImage);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0); glVertex3f(0, 0, 2);
+    glTexCoord2f(1, 0); glVertex3f(0, 0, 0);
+    glTexCoord2f(1, 1); glVertex3f(0, 2, 0);
+    glTexCoord2f(0, 1); glVertex3f(0, 2, 2);
+    glEnd();
+
+    // Back face
+    glBindTexture(GL_TEXTURE_2D, backImage);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0); glVertex3f(0, 2, 2);
+    glTexCoord2f(1, 0); glVertex3f(2, 2, 2);
+    glTexCoord2f(1, 1); glVertex3f(2, 2, 0);
+    glTexCoord2f(0, 1); glVertex3f(0, 2, 0);
+    glEnd();
+
+    // Top face
+    glBindTexture(GL_TEXTURE_2D, topImage);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0); glVertex3f(0, 0, 2);
+    glTexCoord2f(1, 0); glVertex3f(2, 0, 2);
+    glTexCoord2f(1, 1); glVertex3f(2, 2, 2);
+    glTexCoord2f(0, 1); glVertex3f(0, 2, 2);
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+
+    // Draw the sphere on top of the cube with a texture
+    PrimitiveDrawer r = PrimitiveDrawer();
+    r.drawSphereWithTexture(Point(1, 2, 1), 0.75, 50, 50, sphereTexture);
+
+    glPopMatrix();
+}
+
+
+
+
+
+
+
+
 void PrimitiveDrawer::Columns(Point v1, int bottomImage, int frontImage, int rightImage, int leftImage, int backImage, int topImage)
 {
     int rightSideMosqueFront2front;
@@ -474,7 +560,7 @@ void PrimitiveDrawer::Columns(Point v1, int bottomImage, int frontImage, int rig
     for (int i = 0; i < 8; i += 2)
     {
        
-        r.drawCylinderWithTexture(Point(v1.x + 0.5, v1.y, v1.z + i + 0.5), 0.5, -4, 50, rightSideMosqueFront2front);
+        r.drawCylinderWithTexture(Point(v1.x + 0.5, v1.y, v1.z + i + 0.5), 0.3, -4, 50, rightSideMosqueFront2front);
     }
     
     // Draw the quads above the cylinders
@@ -535,5 +621,167 @@ void PrimitiveDrawer::Columns(Point v1, int bottomImage, int frontImage, int rig
 
 
 }
+void PrimitiveDrawer::ColumnsWithTexture(Point v1, int image)
+{
+    PrimitiveDrawer r = PrimitiveDrawer();
 
+    // Draw the four columns
+    for (int i = 0; i < 8; i += 2)
+    {
+        r.drawCylinderWithTexture(Point(v1.x + 0.5, v1.y, v1.z + i + 0.5), 0.5, -4, 50, image);
+    }
 
+    // Draw the quads above the cylinders
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+
+    glBegin(GL_QUADS);
+    // Bottom face
+    glTexCoord2f(0, 0);
+    glNormal3f(0, -1, 0);
+    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z + 7);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + 5, v1.z + 7);
+    glEnd();
+
+    // Front face
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glNormal3f(0, 0, -1);
+    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z + 7);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + 5, v1.z + 7);
+    glEnd();
+
+    // Right face
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glNormal3f(1, 0, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z + 7);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x + 1, v1.y + 4, v1.z + 7);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x + 1, v1.y + 4, v1.z);
+    glEnd();
+
+    // Left face
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glNormal3f(-1, 0, 0);
+    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x, v1.y + 5, v1.z + 7);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x, v1.y + 4, v1.z + 7);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + 4, v1.z);
+    glEnd();
+
+    // Back face
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glNormal3f(0, 0, 1);
+    glVertex3f(v1.x, v1.y + 5, v1.z + 7);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z + 7);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x + 1, v1.y + 4, v1.z + 7);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + 4, v1.z + 7);
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+}
+void PrimitiveDrawer::ColumnsWithTextureAndNum(Point v1, int numColumns, int image)
+{
+    PrimitiveDrawer r = PrimitiveDrawer();
+
+    // Draw the columns
+    for (int i = 0; i < numColumns*2; i+=2)
+    {
+        r.drawCylinderWithTexture(Point(v1.x + 0.5, v1.y, v1.z + i + 0.5), 0.5, -4, 50, image);
+    }
+
+    // Draw the quads above the cylinders
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+
+  
+   
+    glBegin(GL_QUADS);
+    // Bottom face
+    glTexCoord2f(0, 0);
+    glNormal3f(0, -1, 0);
+    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z );
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z );
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + 5, v1.z );
+    glEnd();
+
+    // Front face
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glNormal3f(0, 0, -1);
+    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z + numColumns * 2 - 1);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + 5, v1.z + numColumns * 2 - 1);
+    glEnd();
+
+    // Right face
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glNormal3f(1, 0, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z + numColumns * 2 - 1);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x + 1, v1.y + 4, v1.z + numColumns * 2 - 1);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x + 1, v1.y + 4, v1.z);
+    glEnd();
+
+    // Left face
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glNormal3f(-1, 0, 0);
+    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x, v1.y + 5, v1.z + numColumns * 2 - 1);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x, v1.y + 4, v1.z + numColumns * 2 - 1);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + 4, v1.z);
+    glEnd();
+
+    // Back face
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glNormal3f(0, 0, 1);
+    glVertex3f(v1.x, v1.y + 5, v1.z + numColumns * 2 - 1);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z + numColumns * 2 - 1);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x + 1, v1.y + 4, v1.z + numColumns * 2 - 1);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + 4, v1.z + numColumns * 2 - 1);
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+}

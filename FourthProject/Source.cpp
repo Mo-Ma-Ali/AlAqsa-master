@@ -232,7 +232,7 @@ void Key(bool* keys, float speed)
 }
 int image3, leftSideMosque1, leftSideMosque, topMosque,bottomMosque, rightSideMosque, frontSideMosque, ramp, rightSideMosqueFront1Front, rightSideMosqueFront1right, rightSideMosqueFront2front,
 rightSideMosqueFront3front, roofTop, roofSide, roofSideRotated, frontFront, doomSphere, sidePrayer, sideMusiam
-, frontMusiam, frontMusiam2,azan, azanRotated,darkWall;
+, frontMusiam, frontMusiam2,azan, azanRotated,darkWall, smallDom1, smallDom2;
 int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 {
 	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
@@ -264,6 +264,8 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	frontMusiam2 = LoadTexture("frontMusiam2.bmp", 255);
 	azan = LoadTexture("azan.bmp", 255);
 	azanRotated = LoadTexture("azanRotated.bmp", 255);
+	smallDom1 = LoadTexture("smallDom1.bmp", 255);
+	smallDom2 = LoadTexture("smallDom2.bmp", 255);
 
 
 
@@ -447,6 +449,7 @@ void remaster()
 //	glColor3f(1, 0, 0);
 	//Point n3 = Point(-8, 0, -8.5);
 	//r.QuadWithHigh(n3, 4, 6, .5);
+//	glScalef(0, 0, 1);
 	glPushMatrix();
 	glTranslated(0, 0, -0.5);
 	//
@@ -499,10 +502,10 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	
 //	Draw_Skybox(0, 0, 0, 100, 100, 100);
 	Point g11 = Point(-5.34, 0, 9.5);
-	r.SmallMinaret(g11, 1, 1, 1);
-	Point z11 = Point(-7.62, 0, 16.11);
+	r.SmallMinaretWithTexture(g11, 1, 1, 1, smallDom2, smallDom2, smallDom2, smallDom2, smallDom2, smallDom2, darkWall);
+	Point z11 = Point(-10.62, 0, 16.11);
 	//glScaled(.5, 1, .5);
-	r.SmallMinaret(z11, .75, .75, .75);
+	r.SmallMinaretWithTexture(z11, .75, 1.7, .75, smallDom1, smallDom1, smallDom1, smallDom1, smallDom1, smallDom1,darkWall);
 	
 	glPushMatrix();
 	doom();
@@ -510,8 +513,9 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	glPopMatrix();
 
 	glPushMatrix();
-	
-	//r.Columns(ex, frontFront, frontFront, frontFront, frontFront, frontFront, frontFront);
+	Point z12 = Point(-15.62, 0, 16.11);
+         // r.ColumnsWithTexture(z12, rightSideMosqueFront2front);
+          r.ColumnsWithTextureAndNum(z12,4, rightSideMosqueFront2front);
 	glPopMatrix();
     
 /*	glEnable(GL_TEXTURE_2D);
