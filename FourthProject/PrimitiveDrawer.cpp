@@ -399,6 +399,197 @@ void PrimitiveDrawer::QuadWithHighAndTexture(Point v1, float width, float size, 
     glVertex3f(v1.x, v1.y + size, v1.z + height);
     glEnd();
     glDisable(GL_TEXTURE_2D);
+}void PrimitiveDrawer::QuadWithHighAndTextureMainGround(Point v1, float width, float size, float height, int image,int noRepeat) {
+    // Bottom face
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x, v1.y, v1.z);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x + width, v1.y, v1.z);
+    glTexCoord2f(noRepeat, noRepeat);
+    glVertex3f(v1.x + width, v1.y + size, v1.z);
+    glTexCoord2f(0, noRepeat);
+    glVertex3f(v1.x, v1.y + size, v1.z);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+    // Front face
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x, v1.y, v1.z);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x + width, v1.y, v1.z);
+    glTexCoord2f(noRepeat, noRepeat);
+    glVertex3f(v1.x + width, v1.y, v1.z + height);
+    glTexCoord2f(0, noRepeat);
+    glVertex3f(v1.x, v1.y, v1.z + height);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+    // Right face
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x + width, v1.y, v1.z);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x + width, v1.y + size, v1.z);
+    glTexCoord2f(noRepeat, noRepeat);
+    glVertex3f(v1.x + width, v1.y + size, v1.z + height);
+    glTexCoord2f(0, noRepeat);
+    glVertex3f(v1.x + width, v1.y, v1.z + height);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+    // Left face
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x, v1.y, v1.z);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x, v1.y + size, v1.z);
+    glTexCoord2f(noRepeat, noRepeat);
+    glVertex3f(v1.x, v1.y + size, v1.z + height);
+    glTexCoord2f(0, noRepeat);
+    glVertex3f(v1.x, v1.y, v1.z + height);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+    // Back face
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x, v1.y + size, v1.z);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x + width, v1.y + size, v1.z);
+    glTexCoord2f(noRepeat, noRepeat);
+    glVertex3f(v1.x + width, v1.y + size, v1.z + height);
+    glTexCoord2f(0, noRepeat);
+    glVertex3f(v1.x, v1.y + size, v1.z + height);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+    // Top face
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x, v1.y, v1.z + height);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x + width, v1.y, v1.z + height);
+    glTexCoord2f(noRepeat, noRepeat);
+    glVertex3f(v1.x + width, v1.y + size, v1.z + height);
+    glTexCoord2f(0, noRepeat);
+    glVertex3f(v1.x, v1.y + size, v1.z + height);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}void PrimitiveDrawer::QuadWithHighAndTextureMainWall(Point v1, float width, float size, float height, int image,int noRepeat) {
+    // Bottom face
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x, v1.y, v1.z);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x + width, v1.y, v1.z);
+    glTexCoord2f(noRepeat, 1);
+    glVertex3f(v1.x + width, v1.y + size, v1.z);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + size, v1.z);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+    // Front face
+    /*glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+   // glColor3f(.53, .3, 0);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x, v1.y, v1.z);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x + width, v1.y, v1.z);
+    glTexCoord2f(noRepeat, 1);
+    glVertex3f(v1.x + width, v1.y, v1.z + height);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y, v1.z + height);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);*/
+
+    
+
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+
+    // Rotate the texture by 90 degrees
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x + width, v1.y, v1.z);
+
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x + width, v1.y + size, v1.z);
+
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x + width, v1.y + size, v1.z + height);
+
+    glTexCoord2f(noRepeat, 1);
+    glVertex3f(v1.x + width, v1.y, v1.z + height);
+
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+
+
+
+    // Left face
+   glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y, v1.z);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x, v1.y + size, v1.z);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x, v1.y + size, v1.z + height);
+    glTexCoord2f(noRepeat, 1);
+    glVertex3f(v1.x, v1.y, v1.z + height);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+    // Back face
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x, v1.y + size, v1.z);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x + width, v1.y + size, v1.z);
+    glTexCoord2f(noRepeat, 1);
+    glVertex3f(v1.x + width, v1.y + size, v1.z + height);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + size, v1.z + height);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+    // Top face
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, image);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(v1.x, v1.y, v1.z + height);
+    glTexCoord2f(noRepeat, 0);
+    glVertex3f(v1.x + width, v1.y, v1.z + height);
+    glTexCoord2f(noRepeat, 1);
+    glVertex3f(v1.x + width, v1.y + size, v1.z + height);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + size, v1.z + height);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
 }
 void PrimitiveDrawer::SmallMinaret(Point v1,float scaleX ,float scaleY,float scaleZ)
 {
