@@ -509,7 +509,7 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	Draw_Skybox(0, 0, 0, 140, 100, 110);
 	glPopMatrix();
 	//main ground
-	r.QuadWithHighAndTextureMainGround(Point(20,0, -60), -120, -1, 89.5, mainGround,80);//89.5 widthtthththth
+	r.QuadWithHighAndTextureMainGround(Point(20,0, -60), -120, -1, 89.5, mainGround,5);//89.5 widthtthththth
 	//2en floor
 	r.QuadWithHighAndTextureMainGround(Point(-32,0, -24), -48, 3, 41.6, mainGround,5);
 	//right wall
