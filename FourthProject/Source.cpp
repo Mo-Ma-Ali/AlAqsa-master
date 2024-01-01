@@ -515,7 +515,8 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	glPushMatrix();
 	Point z12 = Point(-15.62, 0, 16.11);
          // r.ColumnsWithTexture(z12, rightSideMosqueFront2front);
-          r.ColumnsWithTextureAndNum(z12,4, rightSideMosqueFront2front);
+          //r.ColumnsWithTextureAndNum(z12,2, rightSideMosqueFront2front);
+	r.Stairs(z12, 10, 2);
 	glPopMatrix();
     
 /*	glEnable(GL_TEXTURE_2D);

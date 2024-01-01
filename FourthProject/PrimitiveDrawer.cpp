@@ -10,6 +10,7 @@
 #include "camera.h"
 
 GLUquadricObj* b = gluNewQuadric();
+
 PrimitiveDrawer::PrimitiveDrawer() {}
 float M_PI = 3.14159265358979323846;
 void PrimitiveDrawer::drawSphere(Point center, float radius, int numSlices, int numStacks) {
@@ -620,6 +621,18 @@ void PrimitiveDrawer::Columns(Point v1, int bottomImage, int frontImage, int rig
     glDisable(GL_TEXTURE_2D);
 
 
+    // Top face
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, topImage);
+    glBegin(GL_QUADS);
+    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z);
+    glVertex3f(v1.x + 1, v1.y + 4, v1.z);
+    glVertex3f(v1.x, v1.y + 4, v1.z);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+
 }
 void PrimitiveDrawer::ColumnsWithTexture(Point v1, int image)
 {
@@ -639,9 +652,9 @@ void PrimitiveDrawer::ColumnsWithTexture(Point v1, int image)
     // Bottom face
     glTexCoord2f(0, 0);
     glNormal3f(0, -1, 0);
-    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glVertex3f(v1.x, v1.y + 5, v1.z-1);
     glTexCoord2f(1, 0);
-    glVertex3f(v1.x + 1, v1.y + 5, v1.z);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z-1);
     glTexCoord2f(1, 1);
     glVertex3f(v1.x + 1, v1.y + 5, v1.z + 7);
     glTexCoord2f(0, 1);
@@ -652,9 +665,9 @@ void PrimitiveDrawer::ColumnsWithTexture(Point v1, int image)
     glBegin(GL_QUADS);
     glTexCoord2f(0, 0);
     glNormal3f(0, 0, -1);
-    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glVertex3f(v1.x, v1.y + 5, v1.z-1);
     glTexCoord2f(1, 0);
-    glVertex3f(v1.x + 1, v1.y + 5, v1.z);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z-1);
     glTexCoord2f(1, 1);
     glVertex3f(v1.x + 1, v1.y + 5, v1.z + 7);
     glTexCoord2f(0, 1);
@@ -665,26 +678,26 @@ void PrimitiveDrawer::ColumnsWithTexture(Point v1, int image)
     glBegin(GL_QUADS);
     glTexCoord2f(0, 0);
     glNormal3f(1, 0, 0);
-    glVertex3f(v1.x + 1, v1.y + 5, v1.z);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z-1);
     glTexCoord2f(1, 0);
     glVertex3f(v1.x + 1, v1.y + 5, v1.z + 7);
     glTexCoord2f(1, 1);
     glVertex3f(v1.x + 1, v1.y + 4, v1.z + 7);
     glTexCoord2f(0, 1);
-    glVertex3f(v1.x + 1, v1.y + 4, v1.z);
+    glVertex3f(v1.x + 1, v1.y + 4, v1.z-1);
     glEnd();
 
     // Left face
     glBegin(GL_QUADS);
     glTexCoord2f(0, 0);
     glNormal3f(-1, 0, 0);
-    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glVertex3f(v1.x, v1.y + 5, v1.z-1);
     glTexCoord2f(1, 0);
     glVertex3f(v1.x, v1.y + 5, v1.z + 7);
     glTexCoord2f(1, 1);
     glVertex3f(v1.x, v1.y + 4, v1.z + 7);
     glTexCoord2f(0, 1);
-    glVertex3f(v1.x, v1.y + 4, v1.z);
+    glVertex3f(v1.x, v1.y + 4, v1.z-1);
     glEnd();
 
     // Back face
@@ -698,6 +711,20 @@ void PrimitiveDrawer::ColumnsWithTexture(Point v1, int image)
     glVertex3f(v1.x + 1, v1.y + 4, v1.z + 7);
     glTexCoord2f(0, 1);
     glVertex3f(v1.x, v1.y + 4, v1.z + 7);
+    glEnd();
+
+
+    // Top face
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glNormal3f(0, 1, 0);
+    glVertex3f(v1.x, v1.y + 5, v1.z-1);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z-1);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x + 1, v1.y + 4, v1.z-1);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + 4, v1.z-1);
     glEnd();
 
     glDisable(GL_TEXTURE_2D);
@@ -783,5 +810,38 @@ void PrimitiveDrawer::ColumnsWithTextureAndNum(Point v1, int numColumns, int ima
     glVertex3f(v1.x, v1.y + 4, v1.z + numColumns * 2 - 1);
     glEnd();
 
+    // Top face
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glNormal3f(0, 1, 0);
+    glVertex3f(v1.x, v1.y + 5, v1.z);
+    glTexCoord2f(1, 0);
+    glVertex3f(v1.x + 1, v1.y + 5, v1.z);
+    glTexCoord2f(1, 1);
+    glVertex3f(v1.x + 1, v1.y + 4, v1.z);
+    glTexCoord2f(0, 1);
+    glVertex3f(v1.x, v1.y + 4, v1.z);
+    glEnd();
     glDisable(GL_TEXTURE_2D);
+}
+
+
+void PrimitiveDrawer::Stairs(Point v1, float num, int width)
+{
+    PrimitiveDrawer r = PrimitiveDrawer();
+
+    float stepHeight = 1.0 / 16;  // Assuming each step has a height of 1/16
+
+    for (float i = 0; i < num; i++)
+    {
+        glColor3f(1, 0, 0);
+        r.QuadWithHigh(Point(v1.x + i / 10, v1.y + i * stepHeight, v1.z), 0.1, 0.1, width);
+    }
+
+    glColor3f(0, 0, 1);
+    r.DrawTr(Point(v1.x, v1.y, v1.z),
+        Point(v1.x + num / 10, v1.y + num * stepHeight, v1.z), Point(v1.x + num / 10, v1.y, v1.z));
+
+    r.DrawTr(Point(v1.x, v1.y, v1.z + width),
+        Point(v1.x + num / 10, v1.y + num * stepHeight + .2, v1.z + width), Point(v1.x + num / 10, v1.y, v1.z + width));
 }
