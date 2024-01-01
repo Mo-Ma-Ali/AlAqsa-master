@@ -1017,22 +1017,38 @@ void PrimitiveDrawer::ColumnsWithTextureAndNum(Point v1, int numColumns, int ima
 }
 
 
-void PrimitiveDrawer::Stairs(Point v1, float num, int width)
+void PrimitiveDrawer::Stairs(Point v1, float num, int width, float angle)
 {
     PrimitiveDrawer r = PrimitiveDrawer();
 
-    float stepHeight = 1.0 / 16;  // Assuming each step has a height of 1/16
+    float proportion = 5;  
+    float stepHeight =  1 / proportion;  
+
+    glPushMatrix(); 
+
+    // Translate to the center of the stairs
+    glTranslatef(v1.x + num / 20, v1.y + num * stepHeight / 2, v1.z + width / 2);
+
+    // Rotate around the center
+    glRotatef(angle, 0, 1, 0);
+    glScalef(2, 1, 1);
+    // Translate back to the original position
+    glTranslatef(-v1.x - num / 6, -v1.y - num * stepHeight / 2, -v1.z - width / 2);
 
     for (float i = 0; i < num; i++)
     {
-        glColor3f(1, 0, 0);
-        r.QuadWithHigh(Point(v1.x + i / 10, v1.y + i * stepHeight, v1.z), 0.1, 0.1, width);
+       
+        r.QuadWithHigh(Point(v1.x + i / 5, v1.y + (i * stepHeight), v1.z), 0.5, 0.5, width);
     }
+   
+    r.DrawQuad(Point(v1.x, v1.y, v1.z), Point(v1.x, v1.y + 1, v1.z),
+        Point(v1.x + num / 5, v1.y + num * stepHeight + 1, v1.z), Point(v1.x + num / 5, v1.y, v1.z));
 
-    glColor3f(0, 0, 1);
-    r.DrawTr(Point(v1.x, v1.y, v1.z),
-        Point(v1.x + num / 10, v1.y + num * stepHeight, v1.z), Point(v1.x + num / 10, v1.y, v1.z));
+    r.DrawQuad(Point(v1.x, v1.y, v1.z + width), Point(v1.x, v1.y + 1, v1.z + width),
+        Point(v1.x + num / 5, v1.y + num * stepHeight + 1, v1.z + width), Point(v1.x + num / 5, v1.y, v1.z + width));
 
-    r.DrawTr(Point(v1.x, v1.y, v1.z + width),
-        Point(v1.x + num / 10, v1.y + num * stepHeight + .2, v1.z + width), Point(v1.x + num / 10, v1.y, v1.z + width));
+    glPopMatrix();  
 }
+
+
+

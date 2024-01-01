@@ -27,7 +27,7 @@ public:
 	void Columns(Point v1, int bottomImage, int frontImage, int rightImage, int leftImage, int backImage, int topImage);
 	void ColumnsWithTexture(Point v1, int image);
 	void ColumnsWithTextureAndNum(Point v1, int numColumns, int image);
-	void Stairs(Point v1, float num, int width);
+	void Stairs(Point v1, float num, int width, float angle);
 };
 
 #endif

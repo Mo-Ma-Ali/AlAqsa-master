@@ -521,7 +521,7 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	//front wall
 	r.QuadWithHighAndTextureMainWall(Point(-99, 0, -60), -1, 3, 88.5, rotatedMainWall,5);
 
-	
+
 	Point g11 = Point(-5.34, 0, 9.5);
 	r.SmallMinaretWithTexture(g11, 1, 1, 1, smallDom2, smallDom2, smallDom2, smallDom2, smallDom2, smallDom2, darkWall);
 	Point z11 = Point(-10.62, 0, 16.11);
@@ -537,7 +537,10 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	Point z12 = Point(-15.62, 0, 16.11);
          // r.ColumnsWithTexture(z12, rightSideMosqueFront2front);
           //r.ColumnsWithTextureAndNum(z12,2, rightSideMosqueFront2front);
-	r.Stairs(z12, 10, 2);
+	/*glRotatef(90, 0, 0, 1);*/
+	r.Stairs(Point(-32, 0, -3.2), 13, 5, 180);
+	r.ColumnsWithTextureAndNum(Point(-33, 2, -4.2), 3, rightSideMosqueFront2front);
+
 	glPopMatrix();
     
 /*	glEnable(GL_TEXTURE_2D);
