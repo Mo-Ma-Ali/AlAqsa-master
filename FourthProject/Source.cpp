@@ -38,7 +38,7 @@ GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize Th
 	glLoadIdentity();									// Reset The Projection Matrix
 
 	// Calculate The Aspect Ratio Of The Window
-	gluPerspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 100.0f);
+	gluPerspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 1000.0f);
 
 	glMatrixMode(GL_MODELVIEW);							// Select The Modelview Matrix
 	glLoadIdentity();									// Reset The Modelview Matrix
@@ -232,7 +232,7 @@ void Key(bool* keys, float speed)
 }
 int image3, leftSideMosque1, leftSideMosque, topMosque,bottomMosque, rightSideMosque, frontSideMosque, ramp, rightSideMosqueFront1Front, rightSideMosqueFront1right, rightSideMosqueFront2front,
 rightSideMosqueFront3front, roofTop, roofSide, roofSideRotated, frontFront, doomSphere, sidePrayer, sideMusiam
-, frontMusiam, frontMusiam2,azan, azanRotated,darkWall, smallDom1, smallDom2;
+, frontMusiam, frontMusiam2,azan, azanRotated,darkWall, smallDom1, smallDom2, mainGround, mainWall, rotatedMainWall;
 int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 {
 	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
@@ -266,6 +266,9 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	azanRotated = LoadTexture("azanRotated.bmp", 255);
 	smallDom1 = LoadTexture("smallDom1.bmp", 255);
 	smallDom2 = LoadTexture("smallDom2.bmp", 255);
+	mainGround = LoadTexture("main1.bmp", 255);
+	mainWall = LoadTexture("mainWall.bmp", 255);
+	rotatedMainWall = LoadTexture("rotatedMainWall.bmp", 255);
 
 
 
@@ -298,7 +301,7 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	glDisable(GL_TEXTURE_2D);
 	
 	MyCamera = Camera();
-	MyCamera.RotateY(-90);
+	MyCamera.RotateY(-270);
 	MyCamera.Position.x = -40;
 	MyCamera.Position.y = 10;
 	MyCamera.Position.z = 20;
@@ -314,7 +317,7 @@ void doom()
 	Point w = Point(-8, 6, 8.5);//
 	Point b = Point(-8, 0, 8.5);
 	Point d = Point(-8, 6, -8.5);
-	Point z = Point(-8, 0, -8.5);
+	Point z = Point(-8, 0, -8.5);//
 
 	Point a = Point(-8, 6, 8);
 	Point x = Point(-8, 0, 8);//
@@ -324,12 +327,12 @@ void doom()
 	Point j = Point(12, 6, 8.5);//
 	Point i = Point(12, 0, 8.5);//
 	Point j7 = Point(16, 6, -8.5);
-	Point g = Point(16, 0, -8.5);
-	Point f = Point(16, 0, 8);
+	Point g = Point(16, 0, -8.5);//
+	Point f = Point(16, 0, 8);//
 	Point e6 = Point(16, 6, 8);
 	//j7 e6 f g 
 	Point l7 = Point(-8, 6, 8);
-	Point b1 = Point(-8, 0, 8);
+	Point b1 = Point(-8, 0, 8);//
 	//e6 f b1 l7
 	//PrimitiveDrawer r = PrimitiveDrawer();
 	//glColor3f(1, 0, 0);
@@ -499,8 +502,26 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 
 	MyCamera.Render();
 	Key(keys, 0.2);
+	glScaled(5, 5, 5);
+//	glColor3f(1, 0, 0);
+	glPushMatrix();
+	glTranslated(-40, 0, -15);
+	Draw_Skybox(0, 0, 0, 140, 100, 110);
+	glPopMatrix();
+	//main ground
+	r.QuadWithHighAndTextureMainGround(Point(20,0, -60), -120, -1, 89.5, mainGround,5);//89.5 widthtthththth
+	//2en floor
+	r.QuadWithHighAndTextureMainGround(Point(-32,0, -24), -48, 3, 41.6, mainGround,5);
+	//right wall
+	r.QuadWithHighAndTextureMainWall(Point(20, 0, -60), -120, 3, 1, mainWall,5);
+	//back wall
+	r.QuadWithHighAndTextureMainWall(Point(20, 0, -60), -1, 3, 88.5, rotatedMainWall,5);
+	//left wall
+	r.QuadWithHighAndTextureMainWall(Point(20, 0, 28.5), -120, 3, 1, mainWall,5);
+	//front wall
+	r.QuadWithHighAndTextureMainWall(Point(-99, 0, -60), -1, 3, 88.5, rotatedMainWall,5);
+
 	
-//	Draw_Skybox(0, 0, 0, 100, 100, 100);
 	Point g11 = Point(-5.34, 0, 9.5);
 	r.SmallMinaretWithTexture(g11, 1, 1, 1, smallDom2, smallDom2, smallDom2, smallDom2, smallDom2, smallDom2, darkWall);
 	Point z11 = Point(-10.62, 0, 16.11);

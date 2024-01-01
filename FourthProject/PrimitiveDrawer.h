@@ -17,6 +17,8 @@ public:
 	void DrawQuadWithTexture(Point v1, Point v2, Point v3, Point v4, int image);
 	void QuadWithHigh(Point v1, float wedth, float size, float high);
 	void QuadWithHighAndTexture(Point v1, float width, float size, float height, int bottomImage, int frontImage, int rightImage, int leftImage, int backImage, int topImage);
+	void QuadWithHighAndTextureMainGround(Point v1, float width, float size, float height, int image,int norepeat);
+	void QuadWithHighAndTextureMainWall(Point v1, float width, float size, float height, int image, int noRepeat);
 	void DrawTr(Point v1, Point v2, Point v3);
 
 	void DrawTrWithTexture(Point v1, Point v2, Point v3, int image);
