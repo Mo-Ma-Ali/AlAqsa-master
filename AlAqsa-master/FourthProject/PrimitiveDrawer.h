@@ -34,6 +34,7 @@ public:
 	void ColumnsWithTextureAndNum(Point v1, int numColumns, float angle, int image);
 	void Stairs(Point v1, float num, int width, float angle,  int image);
 	void chaneDoom(Point v, float scaleX, float scaleY, float scaleZ, int image);
+	void patch(Point v1, float long1, float short1, float scaleX, float scaleY, float scaleZ);
 };
 
 #endif

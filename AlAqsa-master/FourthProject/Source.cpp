@@ -653,7 +653,7 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	glScaled(3, 3, 3);
 	domOfTheRock();
 	glPopMatrix();
-
+	
 	glPushMatrix();
 	/*
 	Point z12 = Point(-15.62, 0, 16.11);
@@ -676,11 +676,17 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	
 	glPushMatrix();
 	//glRotatef(270, 0, 0, 0);
+	r.patch(Point(-28.76, 0, 18), 10, .4,2,1,1);
+	glPopMatrix();
+	glPushMatrix();
 	r.ColumnsWithTextureAndNum(Point(-55.5, 2, -23), 5,90, rightSideMosqueFront2front);
+	r.patch(Point(-75, 3, -8), 10, .4, 1.5, 1, 2.5);
 	glPopMatrix();
 	glPushMatrix();
 
 	r.chaneDoom(Point(-50, 3, -16), 1.25,1,1.25, rightSideMosqueFront2front);
+	r.SmallMinaretWithTexture(Point(-70, 3, -20), 1, 1.5, 1, smallDom2, smallDom2, smallDom2, smallDom2, smallDom2, smallDom2, darkWall);
+	r.SmallMinaretWithTexture(Point(-81, 0, -25), 3, 4, 3, smallDom1, smallDom1, darkWall, smallDom1, smallDom1, darkWall, darkWall);
 	glPopMatrix();
 /*	glEnable(GL_TEXTURE_2D);
      	glBindTexture(GL_TEXTURE_2D, image2);

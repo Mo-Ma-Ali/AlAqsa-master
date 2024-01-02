@@ -1191,3 +1191,43 @@ void PrimitiveDrawer::chaneDoom(Point v, float scaleX, float scaleY, float scale
     // Reset transformations
     glPopMatrix();
 }
+
+
+void PrimitiveDrawer::patch(Point v1, float long1, float short1, float scaleX, float scaleY, float scaleZ)
+{
+    glPushMatrix();
+    PrimitiveDrawer r = PrimitiveDrawer();
+    Point center = Point(v1.x + 0.5 * long1, v1.y, v1.z + 0.5 * long1);
+
+    // Translate the object's center to the origin
+    glTranslatef(center.x, center.y, center.z);
+
+    // Scale the object
+    glScalef(scaleX, scaleY, scaleZ);
+
+    // Translate the object back to its original position
+    glTranslatef(-center.x, -center.y, -center.z);
+    glColor3f(0, 0, 1);
+    // Draw the first cube
+    r.QuadWithHigh(v1, short1, short1, long1);
+
+    // Draw the second cube
+    Point v2 = Point(v1.x + long1, v1.y, v1.z + long1);
+    r.QuadWithHigh(v1, long1, short1, short1);
+
+    //// Draw the third cube
+    Point v3 = Point(v1.x + long1, v1.y, v1.z);
+    r.QuadWithHigh(v3, short1, short1, long1);
+
+    //// Draw the fourth cube
+    Point v4 = Point(v1.x, v1.y, v1.z + long1);
+    r.QuadWithHigh(v4, long1 + short1, short1, short1);
+    glColor3f(1, 0, 0);
+    r.DrawQuad(v1, v3, v2, v4);
+    glPopMatrix();
+}
+
+
+
+
+//-19.76 , 0 , 18.15
