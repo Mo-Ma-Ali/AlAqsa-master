@@ -1156,25 +1156,25 @@ void PrimitiveDrawer::chaneDoom(Point v, float scaleX, float scaleY, float scale
     glTranslatef(v.x, v.y, v.z);
     glScaled(scaleX, scaleY, scaleZ);
     // Draw the columns
-    for (int i = 0; i < 8 * 2 ; i+=2)
+    for (int i = 0; i < 12 * 2 ; i+=2)
     {
         glTranslated(.5, -.15, 0);
         // Individual column transformation
-        glRotatef(45, 0, 1, 0);
+        glRotatef(30, 0, 1, 0);
        
         glPushMatrix();
-        r.drawCylinderWithTexture(Point(0.5, 4, 2), 0.5, -4, 50, image);
+        r.drawCylinderWithTexture(Point(0.5, 4, 2), 0.2, -4, 50, image);
         glPopMatrix();
-    }for (int i = 0; i < 8 * 2; i += 2)
+    }for (int i = 0; i < 12 * 2; i += 2)
     {
         glTranslated(.5, 0, 0);
         // Individual column transformation
-        glRotatef(45, 0, 1, 0);
+        glRotatef(30, 0, 1, 0);
         glPushMatrix();
-        r.drawCylinderWithTexture(Point(0.5, 4, 2), 0.5, 4, 50, image);
+        r.drawCylinderWithTexture(Point(0.5, 4, 2), 0.2, 4, 50, image);
         glPopMatrix();
     }
-    glTranslated(-.25, 2.25, -2.5);
+    glTranslated(-.25, 2.25, -3);
     r.drawSphereWithTexture(Point(0.5, 4.5, 2), 1.5, 50, 50, image);
     //nick
     r.drawCylinderWithTexture(Point(0.5, 4, 2), 1.5, 1.5, 50, image);
