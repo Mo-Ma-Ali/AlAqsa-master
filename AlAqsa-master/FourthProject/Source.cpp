@@ -667,7 +667,7 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	//side stairs
 	r.Stairs(Point(-32, 0, -21), 13, 7, 180, rightSideMosqueFront2front);
 	r.ColumnsWithTextureAndNum(Point(-33, 2, -23.5), 4,0, rightSideMosqueFront2front);
-	
+	r.patch(Point(-30, 0, -14.3), 10, .4, 2, 1, 1.13);
 	//-50, -24 ,-22.5
 	//r.SmallMinaretWithTexture(Point(-50, 3, -20), 2, 1, 2, smallDom1, smallDom1, smallDom1, smallDom1, smallDom1, smallDom1, darkWall);
 	Point sta = Point(-50, 0, -29);
